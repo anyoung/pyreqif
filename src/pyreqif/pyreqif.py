@@ -124,7 +124,7 @@ class datatype(reqIfObject):
         return myDict
 
 
-class datatypeList(reqIfObject):
+class datatypeList(object):
     def __init__(self):
         self._list = []
 
