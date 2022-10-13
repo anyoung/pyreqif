@@ -8,13 +8,16 @@ import collections
 class reqIfObject(object):
     def __init__(self):
         self._identifier = None
-        self._lastChanged = 0
-        self._logName = ""
+        self._lastchanged = 0
+        self._longname = ""
+
+    def __str__(self):
+        return self._longname if self._longname is not None else ""
 
     def setValues(self, **kwargs):
         self._reqIfObjargs = [
             ('identifier', '_identifier', str, None),
-            ('lastChange', '_lastChanged', str, None),
+            ('lastChange', '_lastchanged', str, None),
             ('longName', '_longname', str, None),
         ]
         for arg_name, destination, function, default in self._reqIfObjargs:
