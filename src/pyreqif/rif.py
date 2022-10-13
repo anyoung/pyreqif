@@ -260,6 +260,10 @@ def load(f):
             #                    specType[specAttribType['identifier']].pop('identifier')
             doc.addRequirementType(reqif2py(specType))
 
+        elif child.tag == ns + "SPEC-RELATION-TYPE":
+            specRelType = getSubElementValuesByTitle(child)
+            doc.addSpecRelationType(reqif2py(specRelType))
+
     def remove_namespaces(thedoc):
         # http://wiki.tei-c.org/index.php/Remove-Namespaces.xsl
         xslt = '''<xsl:stylesheet version="1.0" xmlns:xsl="http://www.w3.org/1999/XSL/Transform">
