@@ -552,8 +552,13 @@ class relationList(reqIfObject):
     def __init__(self):
         self._list = []
 
-    def add(self, relation):
-        self._list.append(relation)
+    def add(self, myrel):
+        self._list.append(relation(**myrel))
+
+    def byId(self, relId):
+        for rel in self._list:
+            if rel._identifier == relId:
+                return rel
 
     def __iter__(self):
         return iter(self._list)
