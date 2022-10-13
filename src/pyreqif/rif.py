@@ -411,6 +411,12 @@ def load(f):
                 targetRef = specRelXml.find('./' + ns + 'TARGET/' + ns + 'SPEC-OBJECT-REF')
                 if targetRef is not None:
                     relation["targetRef"] = targetRef.text
+                targetReq = doc.getReqById(relation["targetRef"])
+                sourceReq = doc.getReqById(relation["sourceRef"])
+                relationType = doc.specRelationTypeList.byId(relation["typeRef"])
+                if targetReq is not None and sourceReq is not None and relationType is not None:
+                    targetReq.addTargetingRelation(reqif2py(relation)["identifier"])
+                    sourceReq.addSourcedRelation(reqif2py(relation)["identifier"])
 
                 doc.addRelation(reqif2py(relation))
     return doc

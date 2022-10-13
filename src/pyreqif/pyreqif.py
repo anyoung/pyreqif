@@ -363,6 +363,15 @@ class requirement(reqIfObject):
         #        for ident, value in kwargs["values"].iteritems():
         for ident, value in kwargs["values"].items():
             self._values.append(requirementItem(**value))
+        # initialise relationships
+        self._targetOf = []
+        self._sourceOf = []
+
+    def addTargetingRelation(self, relation):
+        self._targetOf.append(relation)
+
+    def addSourcedRelation(self, relation):
+        self._sourceOf.append(relation)
 
     @property
     def values(self):
@@ -391,6 +400,8 @@ class requirement(reqIfObject):
         if self._typeref is not None:
             myDict["typeRef"] = self._typeref
         myDict["values"] = self._values
+        myDict["targetOf"] = self._targetOf
+        myDict["sourceOf"] = self._sourceOf
         return myDict
 
 
@@ -527,6 +538,15 @@ class relation(reqIfObject):
                 ', '.join(kwargs.keys())
             ))
 
+    def toDict(self):
+        myDict = reqIfObject.toDict(self)
+        if self._typeref is not None:
+            myDict["typeRef"] = self._typeref
+        if self._sourceref is not None:
+            myDict["sourceRef"] = self._sourceref
+        if self._targetref is not None:
+            myDict["targetRef"] = self._targetref
+        return myDict
 
 class relationList(reqIfObject):
     def __init__(self):
